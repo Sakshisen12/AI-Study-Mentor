@@ -8,14 +8,14 @@ export default function Navbar() {
   const handleLogout = async () => {
     try {
       // Optional: Call backend logout
-      await fetch('http://localhost:8000/logout', {
+      await fetch('/api/logout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' }
       })
     } catch (error) {
       console.log('Logout API optional')
     }
-    
+
     // Clear token & redirect
     localStorage.removeItem('token')
     navigate('/', { replace: true })
@@ -36,7 +36,7 @@ export default function Navbar() {
           <>
             <Link to="/dashboard" className="hover:text-gray-300 text-5xl">Dashboard</Link>
             <Link to="/studyLog" className="hover:text-gray-300 text-5xl">Study Log</Link>
-            <button 
+            <button
               onClick={handleLogout}
               className="bg-red-600 px-4 py-1 rounded hover:bg-red-700 text-5xl"
             >

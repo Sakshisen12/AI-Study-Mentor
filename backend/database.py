@@ -1,9 +1,6 @@
+import os
 
-import certifi
-from pymongo import MongoClient
-from pymongo.errors import ServerSelectionTimeoutError
-
-MONGO_URL = "mongodb+srv://shakshisen35600_db_user:WrIOXsl7l8fq0BAh@cluster0.r6dridz.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+MONGO_URL = os.getenv("MONGO_URL", "mongodb+srv://shakshisen35600_db_user:WrIOXsl7l8fq0BAh@cluster0.r6dridz.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 
 class MockCollection:
     def __init__(self):
@@ -34,6 +31,9 @@ class MockCollection:
         return results[0] if results else None
 
 try:
+    if not MONGO_URL:
+        raise ValueError("MONGO_URL is not set")
+        
     client = MongoClient(
         MONGO_URL,
         tls=True,
@@ -49,8 +49,9 @@ try:
     study_collection = db["studylogs"]
     users_collection = db["users"]
     
-except ServerSelectionTimeoutError:
-    print("❌ MongoDB Connection Failed - Using Mock Database")
+except Exception as e:
+    print(f"❌ MongoDB Connection Failed: {str(e)}")
+    print("⚠️ Using Mock Database as fallback")
     # Fallback to in-memory storage with MockCollection
     users_collection = MockCollection()
     study_collection = MockCollection()

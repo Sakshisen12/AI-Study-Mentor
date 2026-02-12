@@ -8,7 +8,7 @@ import os
 from database import study_collection, users_collection  # Import database
 
 # SECRET_KEY
-SECRET_KEY = "your_secret_key"
+SECRET_KEY = os.getenv("SECRET_KEY", "your_secret_key_here")
 app = FastAPI()
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
 

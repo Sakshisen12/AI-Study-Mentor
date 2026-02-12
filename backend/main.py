@@ -38,6 +38,7 @@ def get_current_user(token: str = Depends(oauth2_scheme)):
     except jwt.PyJWTError:
         raise HTTPException(status_code=401, detail="Invalid credentials")
 
+@app.get("/api")
 @app.get("/")
 def home():
     return {"message": "AI Study Mentor Backend ✅"}
@@ -47,6 +48,7 @@ class User(BaseModel):
     email: str
     password: str
 
+@app.post("/api/register")
 @app.post("/register")
 def register(user: User):
     # Check existing user
@@ -60,6 +62,7 @@ def register(user: User):
     print(f"✅ Registered: {user.email}")
     return {"message": "User registered successfully", "token": "demo-jwt-token"}
 
+@app.post("/api/login")
 @app.post("/login")
 def login(user: User):
     db_user = users_collection.find_one({"email": user.email})
@@ -68,6 +71,7 @@ def login(user: User):
         return {"token": token, "name": db_user["name"]}
     
     raise HTTPException(status_code=400, detail="Invalid email or password")
+@app.post("/api/logout")
 @app.post("/logout")
 def logout():
     """Logout endpoint - frontend clears token on response"""
@@ -82,6 +86,7 @@ class StudyLog(BaseModel):
     confidence: int
     date: str
 
+@app.post("/api/studylog")
 @app.post("/studylog")
 def save_study_log(data: StudyLog, user_email: str = Depends(get_current_user)):
     # ML Prediction (fallback if no model)
@@ -100,11 +105,13 @@ def save_study_log(data: StudyLog, user_email: str = Depends(get_current_user)):
     print(f"📚 Saved for {user_email}: {data.subject} - Score: {prediction:.1f}")
     return {"message": "Study log saved", "predicted_score": prediction}
 
+@app.get("/api/studylog")
 @app.get("/studylog")
 def get_study_logs(user_email: str = Depends(get_current_user)):
     logs = list(study_collection.find({"user_email": user_email}, {"_id": 0})) # Filter by user
     return logs
 
+@app.get("/api/recommendation")
 @app.get("/recommendation")
 def get_recommendation(user_email: str = Depends(get_current_user)):
     logs = list(study_collection.find({"user_email": user_email}, {"_id": 0})) # Filter by user

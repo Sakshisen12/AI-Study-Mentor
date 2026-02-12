@@ -41,10 +41,7 @@ try:
         serverSelectionTimeoutMS=5000,
         connectTimeoutMS=5000
     )
-    # Test connection
-    client.admin.command('ping')
-    print("✅ MongoDB Connected!")
-    
+    # MongoDB Connected (Lazy connection)
     db = client["studydb"]
     study_collection = db["studylogs"]
     users_collection = db["users"]

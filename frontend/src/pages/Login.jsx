@@ -32,8 +32,9 @@ const Login = () => {
       }
     } catch (error) {
       console.log(error);
-      const errorMsg = error.response?.data?.detail || "Server Connection Failed";
-      alert(`Status: ${errorMsg}`);
+      const status = error.response?.status || "Network Error";
+      const detail = error.response?.data?.detail || "Connection Failed";
+      alert(`Server Error (${status}): ${detail}`);
     }
   };
 

@@ -9,7 +9,7 @@ from database import study_collection, users_collection  # Import database
 
 # SECRET_KEY
 SECRET_KEY = os.getenv("SECRET_KEY", "your_secret_key_here")
-app = FastAPI()
+app = FastAPI(root_path="/api")
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
 
 # Load model with fallback

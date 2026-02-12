@@ -29,8 +29,9 @@ const Register = () => {
       }
     } catch (error) {
       console.log(error);
-      const errorMsg = error.response?.data?.detail || "Registration Protocol Failed";
-      alert(`Status: ${errorMsg}`);
+      const status = error.response?.status || "Network Error";
+      const detail = error.response?.data?.detail || "Connection Failed";
+      alert(`Registration Error (${status}): ${detail}`);
     }
   };
 

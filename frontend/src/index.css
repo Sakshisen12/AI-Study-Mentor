@@ -1,0 +1,125 @@
+@import "tailwindcss";
+
+:root {
+  /* Vibrant & Glowy Theme Palette */
+  --bg-primary: #050511;
+  /* Deep space black */
+  --bg-surface: rgba(15, 23, 42, 0.8);
+
+  --text-primary: #ffffff;
+  --text-secondary: #cbd5e1;
+
+  --accent-primary: #4f46e5;
+  /* Indigo */
+  --accent-secondary: #06b6d4;
+  /* Cyan */
+  --accent-glow: rgba(79, 70, 229, 0.6);
+
+  /* Large Scale Variables */
+  --fs-base: 18px;
+  --fs-lg: 22px;
+  --fs-xl: 32px;
+  --fs-2xl: 48px;
+  --fs-3xl: 72px;
+
+  --spacing-scale: 1.25;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: var(--fs-base);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Vibrant Animated Background */
+body::before {
+  content: "";
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at center,
+      rgba(79, 70, 229, 0.2) 0%,
+      rgba(6, 182, 212, 0.15) 25%,
+      rgba(5, 5, 17, 0) 60%);
+  animation: rotateBackground 25s linear infinite;
+  z-index: -1;
+  pointer-events: none;
+}
+
+@keyframes rotateBackground {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Larger Glass panels with stronger borders */
+.glass-panel {
+  background: var(--bg-surface);
+  backdrop-filter: blur(16px);
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5), 0 0 15px var(--accent-glow);
+  border-radius: 2rem;
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.glass-card:hover {
+  border-color: var(--accent-secondary);
+  box-shadow: 0 0 25px var(--accent-glow);
+  transform: translateY(-8px) scale(1.02);
+}
+
+/* Custom Scrollbar - Larger */
+::-webkit-scrollbar {
+  width: 14px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0f172a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, var(--accent-primary), var(--accent-secondary));
+  border-radius: 7px;
+  border: 2px solid #0f172a;
+}
+
+/* Scaling Enhancements */
+h1 {
+  font-size: var(--fs-3xl);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+}
+
+h2 {
+  font-size: var(--fs-2xl);
+  font-weight: 800;
+}
+
+h3 {
+  font-size: var(--fs-xl);
+  font-weight: 700;
+}
+
+p {
+  font-size: var(--fs-lg);
+}
+
+.perspective-1000 {
+  perspective: 1500px;
+}

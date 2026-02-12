@@ -44,18 +44,20 @@ try:
         connectTimeoutMS=5000
     )
     # MongoDB Connected (Lazy connection)
+    client.admin.command('ping') # Test if credentials are valid immediately
     db = client["studydb"]
     study_collection = db["studylogs"]
     users_collection = db["users"]
     
 except Exception as e:
     error_msg = str(e)
-    if "authentication failed" in error_msg.lower() or "bad auth" in error_msg.lower():
-        print("❌ MongoDB Auth Failed: Check your username and password in MONGO_URL")
+    if "auth" in error_msg.lower():
+        print("❌ DATABASE AUTHENTICATION FAILED!")
+        print("REASON: The username or password in your MONGO_URL is incorrect.")
     else:
-        print(f"❌ MongoDB Connection Failed: {error_msg}")
+        print(f"❌ DATABASE CONNECTION ERROR: {error_msg}")
         
-    print("⚠️ Using Mock Database as fallback")
+    print("⚠️ FALLBACK: Using Mock Database so the site keeps running.")
     # Fallback to in-memory storage with MockCollection
     users_collection = MockCollection()
     study_collection = MockCollection()

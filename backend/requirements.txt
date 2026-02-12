@@ -1,7 +1,5 @@
 fastapi
 uvicorn
-scikit-learn
-pandas
 pyjwt
 pymongo
 certifi

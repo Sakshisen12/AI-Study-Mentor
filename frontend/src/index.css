@@ -15,14 +15,14 @@
   /* Cyan */
   --accent-glow: rgba(79, 70, 229, 0.6);
 
-  /* Large Scale Variables */
-  --fs-base: 18px;
-  --fs-lg: 22px;
-  --fs-xl: 32px;
-  --fs-2xl: 48px;
-  --fs-3xl: 72px;
+  /* Professional Scale Variables */
+  --fs-base: 16px;
+  --fs-lg: 18px;
+  --fs-xl: 24px;
+  --fs-2xl: 36px;
+  --fs-3xl: 48px;
 
-  --spacing-scale: 1.25;
+  --spacing-scale: 1.0;
 }
 
 body {

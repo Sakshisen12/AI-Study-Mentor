@@ -40,33 +40,33 @@ const FloatingNavbar = () => {
             initial={{ y: -100 }}
             animate={{ y: 0 }}
             transition={{ type: "spring", stiffness: 100 }}
-            className={`fixed top-8 left-1/2 transform -translate-x-1/2 z-50 w-[95%] max-w-[1800px] rounded-[3rem] px-12 py-8 transition-all duration-300 ${scrolled ? "bg-black/60 backdrop-blur-2xl border-2 border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)]" : "bg-transparent"
+            className={`fixed top-6 left-1/2 transform -translate-x-1/2 z-50 w-[95%] max-w-[1400px] rounded-full px-8 py-4 transition-all duration-300 ${scrolled ? "bg-black/60 backdrop-blur-2xl border-2 border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)]" : "bg-transparent"
                 }`}
         >
             <div className="flex items-center justify-between">
-                <Link to="/" className="text-5xl font-black bg-gradient-to-r from-indigo-400 via-cyan-400 to-violet-500 bg-clip-text text-transparent uppercase tracking-tighter italic">
+                <Link to="/" className="text-2xl font-black bg-gradient-to-r from-indigo-400 via-cyan-400 to-violet-500 bg-clip-text text-transparent uppercase tracking-tighter italic">
                     AI Study Mentor
                 </Link>
 
                 {/* Desktop Menu */}
-                <div className="hidden xl:flex items-center space-x-16">
+                <div className="hidden xl:flex items-center space-x-10">
                     {navLinks.map((link) => (
                         <Link
                             key={link.name}
                             to={link.path}
-                            className={`flex items-center space-x-4 text-2xl font-black uppercase tracking-[0.2em] transition-all hover:scale-105 active:scale-95 ${location.pathname === link.path ? "text-cyan-400 drop-shadow-[0_0_10px_rgba(34,211,238,0.5)]" : "text-slate-400 hover:text-white"
+                            className={`flex items-center space-x-3 text-sm font-black uppercase tracking-[0.2em] transition-all hover:scale-105 active:scale-95 ${location.pathname === link.path ? "text-cyan-400 drop-shadow-[0_0_10px_rgba(34,211,238,0.5)]" : "text-slate-400 hover:text-white"
                                 }`}
                         >
-                            {link.icon && <link.icon size={36} />}
+                            {link.icon && <link.icon size={18} />}
                             <span>{link.name}</span>
                         </Link>
                     ))}
                     {token && (
                         <button
                             onClick={handleLogout}
-                            className="px-10 py-5 bg-rose-500/20 text-rose-400 rounded-full border-2 border-rose-500/30 hover:bg-rose-500/40 transition-all flex items-center space-x-4 text-2xl font-black uppercase tracking-widest"
+                            className="px-6 py-3 bg-rose-500/10 text-rose-400 rounded-full border-2 border-rose-500/30 hover:bg-rose-500/40 transition-all flex items-center space-x-3 text-sm font-black uppercase tracking-widest"
                         >
-                            <LogOut size={32} />
+                            <LogOut size={18} />
                             <span>Logout</span>
                         </button>
                     )}
@@ -77,7 +77,7 @@ const FloatingNavbar = () => {
                     className="xl:hidden text-white p-2"
                     onClick={() => setIsOpen(!isOpen)}
                 >
-                    {isOpen ? <X size={48} /> : <Menu size={48} />}
+                    {isOpen ? <X size={32} /> : <Menu size={32} />}
                 </button>
             </div>
 

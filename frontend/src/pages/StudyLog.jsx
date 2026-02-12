@@ -1,6 +1,7 @@
 import { useState } from "react"
 import GlassCard from "../components/GlassCard"
 import { motion } from "framer-motion"
+import { API } from "../api/api"
 
 const StudyLog = () => {
 
@@ -25,20 +26,19 @@ const StudyLog = () => {
     e.preventDefault()
     try {
       const token = localStorage.getItem("token")
-      const res = await fetch("http://localhost:8000/studylog", {
-        method: "POST",
+      const res = await API.post("/studylog", {
+        subject: formData.subject,
+        topic: formData.topic,
+        studyTime: Number(formData.studyTime),
+        difficulty: Number(formData.difficulty),
+        confidence: Number(formData.confidence),
+        date: formData.date
+      }, {
         headers: {
-          "Content-Type": "application/json",
           "Authorization": `Bearer ${token}`
-        },
-        body: JSON.stringify({
-          ...formData,
-          studyTime: Number(formData.studyTime),
-          difficulty: Number(formData.difficulty),
-          confidence: Number(formData.confidence)
-        })
+        }
       })
-      const data = await res.json()
+      const data = res.data
       console.log(data)
       alert("Study Session Logged Successfully!")
       // Reset form or navigate

@@ -1,15 +1,28 @@
-from fastapi import FastAPI, HTTPException, Depends
+from fastapi import FastAPI, HTTPException, Depends, Request
+from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import OAuth2PasswordBearer
 from pydantic import BaseModel
 import pickle
 import jwt
 import os
-from database import study_collection, users_collection  # Import database
+try:
+    from .database import study_collection, users_collection
+except (ImportError, ValueError):
+    from database import study_collection, users_collection
 
 # SECRET_KEY
 SECRET_KEY = os.getenv("SECRET_KEY", "your_secret_key_here")
 app = FastAPI()
+
+@app.exception_handler(Exception)
+async def global_exception_handler(request: Request, exc: Exception):
+    print(f"🔥 Global Crash: {str(exc)}")
+    return JSONResponse(
+        status_code=500,
+        content={"detail": f"Internal Server Error: {str(exc)}"},
+    )
+
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
 
 # Load model with fallback

@@ -1,5 +1,7 @@
 fastapi
 uvicorn
 pyjwt
-pymongo
+pymongo[srv]
 certifi
+dnspython
+python-multipart

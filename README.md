@@ -11,7 +11,7 @@
 ---
 
 ## 🚀 Live Demo
-**[View Live Project](https://ai-study-mentor-alpha.vercel.app/)** *(Replace with your actual Vercel link)*
+**[View Live Project](ai-study-mentor-six.vercel.app)** 
 
 ---
 

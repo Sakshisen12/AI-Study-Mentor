@@ -49,7 +49,12 @@ try:
     users_collection = db["users"]
     
 except Exception as e:
-    print(f"❌ MongoDB Connection Failed: {str(e)}")
+    error_msg = str(e)
+    if "authentication failed" in error_msg.lower() or "bad auth" in error_msg.lower():
+        print("❌ MongoDB Auth Failed: Check your username and password in MONGO_URL")
+    else:
+        print(f"❌ MongoDB Connection Failed: {error_msg}")
+        
     print("⚠️ Using Mock Database as fallback")
     # Fallback to in-memory storage with MockCollection
     users_collection = MockCollection()

@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { API } from '../api/api'
 
 export default function Navbar() {
   const token = localStorage.getItem('token')
@@ -8,10 +9,7 @@ export default function Navbar() {
   const handleLogout = async () => {
     try {
       // Optional: Call backend logout
-      await fetch('/api/logout', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' }
-      })
+      await API.post('/logout')
     } catch (error) {
       console.log('Logout API optional')
     }

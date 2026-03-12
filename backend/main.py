@@ -20,9 +20,20 @@ except:
     model = None
     print("⚠️ No model - using default predictions")
 
+# Build allowed origins from environment variable + localhost fallbacks
+frontend_url = os.getenv("FRONTEND_URL", "")
+origins = [
+    "http://localhost:5173",
+    "http://localhost:3000",
+]
+if frontend_url:
+    origins.append(frontend_url)
+    # Also allow without trailing slash
+    origins.append(frontend_url.rstrip("/"))
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

@@ -4,7 +4,9 @@
     {
       "src": "frontend/package.json",
       "use": "@vercel/static-build",
-      "config": { "distDir": "dist" }
+      "config": {
+        "distDir": "dist"
+      }
     },
     {
       "src": "api/main.py",
@@ -12,13 +14,13 @@
     }
   ],
   "routes": [
-    { "src": "/api/(.*)", "dest": "/api/main.py" },
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/main.py"
+    },
     {
       "src": "/(.*)",
-      "dest": "/frontend/dist/$1",
-      "headers": {
-        "cache-control": "public, max-age=0, must-revalidate"
-      }
+      "dest": "/$1"
     }
   ]
 }

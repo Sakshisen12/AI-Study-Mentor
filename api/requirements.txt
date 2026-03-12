@@ -5,3 +5,5 @@ pymongo[srv]
 certifi
 dnspython
 python-multipart
+scikit-learn
+pandas

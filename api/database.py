@@ -2,7 +2,7 @@ import os
 import certifi
 from pymongo import MongoClient
 
-MONGO_URL = os.getenv("MONGO_URL", "mongodb+srv://shakshisen35600_db_user:WrIOXsl7l8fq0BAh@cluster0.r6dridz.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+MONGO_URL = os.getenv("MONGO_URL", "")
 
 class MockCollection:
     def __init__(self):

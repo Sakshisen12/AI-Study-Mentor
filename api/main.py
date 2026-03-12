@@ -27,11 +27,13 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
 
 # Load model with fallback
 try:
-    model = pickle.load(open("model.pkl", "rb"))
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    model_path = os.path.join(current_dir, "model.pkl")
+    model = pickle.load(open(model_path, "rb"))
     print("✅ Model loaded")
-except:
+except Exception as e:
     model = None
-    print("⚠️ No model - using default predictions")
+    print(f"⚠️ No model - using default predictions. Error: {e}")
 
 app.add_middleware(
     CORSMiddleware,
